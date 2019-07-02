@@ -5,4 +5,17 @@
     </form>
 </div>
 <h1>Home#page</h1>
-<p>Find me in app/views/home/page.html.erb</p>
+<% @cars.each do |car| %>
+    <%# this div card is copied straight from bootstrap %>
+    <div class="card">
+      <%= image_tag car.pictures.first %>
+        <div class = "card-body">
+            <p class="card-text">
+                <%=car.model%> <%=car.make%>
+            </p>
+            <p>
+                $<%= car.price%>
+            </p>
+        </div>
+    </div>
+<%end%>

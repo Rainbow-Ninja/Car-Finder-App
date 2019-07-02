@@ -1,18 +1,26 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-<a class="navbar-brand ml-auto" href="#">Navbar</a>
+<a class="navbar-brand ml-auto" href="/">CarFinder</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link btn btn-primary" href="#">Sell my Car<span class="sr-only">(current)</span></a>
+        <%= link_to "Sell My Car", new_car_path, class: "nav- btn btn-primary"%>
       </li>
       <li class="nav-item">
-        <div class="mr-auto"><a class="nav-link" href="#">Listings</a></div>
+       <a class="nav-link" href="#">Listings</a>
       </li>
-      <li class="nav-item dropdown">
+      <% if user_signed_in? %>
+        <li class="nav-item">
+        <%= link_to "LogOut", destroy_user_session_path, method: :delete, class: "nav-link"%>
+      </li>
+      <%else%>
+      <li class="nav-item">
+        <%= link_to "LogIn", new_user_session_path, class: "nav-link"%>
+      </li>
+      <%end%>
     </ul>
   </div>
 </nav>
