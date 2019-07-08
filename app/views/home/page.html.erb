@@ -5,4 +5,19 @@
     </form>
 </div>
 <h1>Home#page</h1>
-<p>Find me in app/views/home/page.html.erb</p>
+<h1> Hello </h1>
+<div class="row">
+    <% @cars.each do |car| %>
+        <div class="col-md-4">
+            <div class="card mt-5">
+                <%= image_tag car.pictures.first, class: "card-img-top"%>
+                <div class="card-body">
+                    <h5 class="card-title"><%=car.make%> <%=car.model%></h5>
+                    <p class="card-text">$<%=car.price%>0</p>
+                    <%= link_to "Have a closer look", car_path(car.id), class: "btn btn-primary"%>
+                </div>
+            </div>
+        </div>
+        
+    <%end%>
+</div>
