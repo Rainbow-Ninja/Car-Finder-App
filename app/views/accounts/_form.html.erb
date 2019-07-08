@@ -1,5 +1,5 @@
 
-<%= simple_form_for(@profile) do |f| %>
+<%= simple_form_for(@account) do |f| %>
   <%= f.error_notification %>
   <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
@@ -7,11 +7,9 @@
     <%= f.input :first_name %>
     <%= f.input :last_name %>
     <%= f.input :user_name %>
-    <%= f.input :phone_number %>
+    <%= f.input :phone_name %>
     <%= f.input :address %>
-    <%# pass the user type in hidden field %>
-    <%= f.hidden_field :user_type, value: @user_type%>
- 
+    <%= f.association :user %>
   </div>
 
   <div class="form-actions">

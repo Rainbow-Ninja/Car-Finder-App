@@ -5,17 +5,19 @@
     </form>
 </div>
 <h1>Home#page</h1>
-<% @cars.each do |car| %>
-    <%# this div card is copied straight from bootstrap %>
-    <div class="card">
-      <%= image_tag car.pictures.first %>
-        <div class = "card-body">
-            <p class="card-text">
-                <%=car.model%> <%=car.make%>
-            </p>
-            <p>
-                $<%= car.price%>
-            </p>
+<h1> Hello </h1>
+<div class="row">
+    <% @cars.each do |car| %>
+        <div class="col-md-4">
+            <div class="card mt-5">
+                <%= image_tag car.pictures.first, class: "card-img-top"%>
+                <div class="card-body">
+                    <h5 class="card-title"><%=car.make%> <%=car.model%></h5>
+                    <p class="card-text">$<%=car.price%>0</p>
+                    <%= link_to "Have a closer look", car_path(car.id), class: "btn btn-primary"%>
+                </div>
+            </div>
         </div>
-    </div>
-<%end%>
+        
+    <%end%>
+</div>

@@ -1,5 +1,4 @@
 class ProfilesController < ApplicationController
-  #before doing show, edit, update or detroy - got to the set_profile method
   before_action :set_profile, only: [:show, :edit, :update, :destroy]
 
   # GET /profiles
@@ -16,6 +15,8 @@ class ProfilesController < ApplicationController
   # GET /profiles/new
   def new
     @profile = Profile.new
+    # capture the user_type passed in the route
+     @user_type = params[:user_type] 
   end
 
   # GET /profiles/1/edit
@@ -26,14 +27,25 @@ class ProfilesController < ApplicationController
   # POST /profiles.json
   def create
     @profile = Profile.new(profile_params)
-    #connect user_id to profile table
+    # connect user_id to the profile table
     @profile.user_id = current_user.id
 
     respond_to do |format|
       if @profile.save
-        #after creating profile user is redirecting to new car path
-        format.html { redirect_to new_car_path, notice: 'Profile was successfully created.' }
-        format.json { render :show, status: :created, location: @profile }
+        # if the user is buyer redirect to the root_path else redirect to listing a car's page
+        if params[:profile][:user_type] == "buyer"
+          # update the buyers table with the profile_id 
+          @buyer = Buyer.new
+          @buyer.profile_id = current_user.profile.id
+          @buyer.save
+          # after creating a profile user must be automatically redirect to listing a new car
+          format.html { redirect_to root_path, notice: 'Profile was successfully created.' }
+          format.json { render :show, status: :created, location: @profile }
+        else
+          # after creating a profile user must be automatically redirect to listing a new car
+          format.html { redirect_to new_car_path, notice: 'Profile was successfully created.' }
+          format.json { render :show, status: :created, location: @profile }
+        end
       else
         format.html { render :new }
         format.json { render json: @profile.errors, status: :unprocessable_entity }

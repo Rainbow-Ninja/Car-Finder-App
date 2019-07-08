@@ -1,4 +1,10 @@
 <p id="notice"><%= notice %></p>
+<div class = "row">
+  <div class = "col-md-8">
+  <% @car.pictures.each do |picture|%>
+    <% image_tag picture, class: "d-block w-100"%>
+  <%end%>
+</div>
 
 <p>
   <strong>Picture:</strong>
@@ -61,4 +67,4 @@
 </p>
 
 <%= link_to 'Edit', edit_car_path(@car) %> |
-<%= link_to 'Back', cars_path %>
+<%= link_to 'Back', cars_path %> 
