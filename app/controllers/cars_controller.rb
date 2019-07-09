@@ -41,19 +41,22 @@ class CarsController < ApplicationController
     @car.seller_id = current_user.profile.seller.id
 
     respond_to do |format|
-    if @car.save
-      format.html { redirect_to @car, notice: 'Car was successfully created.' }
-      format.json { render :show, status: :created, location: @car }
-    else
-      format.html { render :new }
-      format.json { render json: @car.errors, status: :unprocessable_entity }
-    end
+      if @car.save
+        format.html { redirect_to @car, notice: 'Car was successfully created.' }
+        format.json { render :show, status: :created, location: @car }
+      else
+        format.html { render :new }
+        format.json { render json: @car.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   # PATCH/PUT /cars/1
   # PATCH/PUT /cars/1.json
   def update
+    if @car.pictures
+      @car.pictures.purge
+    end
     respond_to do |format|
       if @car.update(car_params)
         format.html { redirect_to @car, notice: 'Car was successfully updated.' }

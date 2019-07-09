@@ -4,13 +4,20 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </div>
-<h1>Home#page</h1>
-<h1> Hello </h1>
-<div class="row">
+
+<div class="row mt-5">
     <% @cars.each do |car| %>
-        <div class="col-md-4">
-            <div class="card mt-5">
-                <%= image_tag car.pictures.first, class: "card-img-top"%>
+        <div class="col-md-4 mt-5">
+            <div class="card">
+            <%# check if the image is there, if not set default pic %>
+            <% if car.pictures.first.present? %>
+                <%= image_tag car.pictures.first, class: "card-img-top" %>
+            <%elsif car.pictures.second.present? %>
+                <%= image_tag car.pictures.second, class: "card-img-top" %>
+            <%else%>
+                <%= image_tag "default.PNG", class: "card-img-top" %>
+            <%end%>
+
                 <div class="card-body">
                     <h5 class="card-title"><%=car.make%> <%=car.model%></h5>
                     <p class="card-text">$<%=car.price%>0</p>
