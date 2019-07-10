@@ -38,7 +38,7 @@ class CarsController < ApplicationController
     @seller.profile_id = current_user.profile.id
     @seller.save
     # link seller_id to car model
-    @car.seller_id = current_user.profile.seller.id
+    @car.seller_id = current_user.profile.seller.id 
 
     respond_to do |format|
       if @car.save

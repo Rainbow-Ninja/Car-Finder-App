@@ -16,7 +16,7 @@ class ProfilesController < ApplicationController
   def new
     @profile = Profile.new
     # capture the user_type passed in the route
-     @user_type = params[:user_type] 
+    @user_type = params[:user_type] 
   end
 
   # GET /profiles/1/edit

@@ -67,5 +67,12 @@
   </div>
 </div>
 
-<%= link_to 'Edit', edit_car_path(@car) %> |
+<%# if listed car is by the seller who has logged in, show edit button, else show buy button %>
+<% if (current_user && current_user.profile && (current_user.profile.id == @car.seller.profile_id)) %>
+  <%= link_to 'Edit', edit_car_path(@car) %> |
+<% else %>
+  <% if current_user && current_user.profile &&current_user.profile.buyer%>
+    <%= link_to 'Buy', buyer_page_path(car_id: @car.id, seller_id: @car.seller_id), class: "btn btn-primary" %>
+    <%end%>
+<%end%>
 <%= link_to 'Back', cars_path %> 
